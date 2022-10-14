@@ -53,12 +53,16 @@ exports.getAllTodos = (req, res, next) => {
 
    //update to do
    exports.updateTodo = (req, res, next) => {
+    let status = req.body.status     
     if (!req.params.id) {
       return next(new AppError("No todo id found", 404));
     }
+    let update = `UPDATE todolist SET status='${status}' WHERE id=${req.params.id}`
+    // fs.writeFile("books.txt", update, (err) => {
+    //  console.log(update)
+    // });     
     conn.query(
-      "UPDATE todolist SET status='completed' WHERE id=?",
-      [req.params.id],
+      update,
       function (err, data, fields) {
         if (err) return next(new AppError(err, 500));
         res.status(201).json({

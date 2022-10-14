@@ -3,7 +3,6 @@ const cors = require("cors");
 const router = require("./routes");
 const AppError = require("./utils/appError");
 const errorHandler = require("./utils/errorHandler");
-
 app.use(api, router);
 
 app.all("*", (req, res, next) => {
